@@ -55,7 +55,7 @@ class CheeseListing {
   /**
    * @ORM\Column(type="boolean")
    */
-  private $isPublished;
+  private $isPublished=false;
 
 	public function __construct(){
 		$this->createdAt = new \DateTimeImmutable();
