@@ -68,12 +68,6 @@ class CheeseListing {
     return $this->description;
   }
 
-  public function setDescription(string $description): self {
-    $this->description = $description;
-
-    return $this;
-  }
-
 	public function setTextDescription(string $description): self {
 		$this->description = nl2br($description);
 
