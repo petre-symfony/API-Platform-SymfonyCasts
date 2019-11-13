@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "get",
  *     "put"
  *   },
+ *   normalizationContext={"groups"={"cheese_listing:read"}}
  *   shortName="cheeses"
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
@@ -27,6 +28,7 @@ class CheeseListing {
 
   /**
    * @ORM\Column(type="string", length=255)
+	 * @Groups({"cheese_listing:read"})
    */
   private $title;
 
