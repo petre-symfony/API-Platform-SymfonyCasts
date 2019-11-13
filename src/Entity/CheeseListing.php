@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "get",
  *     "put"
  *   },
- *   normalizationContext={"groups"={"cheese_listing:read", "swagger_definition_name"="Read"}},
+ *   normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
  *   denormalizationContext={"groups"={"cheese_listing:write"}, "swagger_definition_name"="Write"},
  *   shortName="cheeses"
  * )
@@ -79,6 +79,17 @@ class CheeseListing {
     return $this->description;
   }
 
+
+	public function setDescription($description):self{
+		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 * The description of the cheese as raw text.
+	 *
+	 * @Groups("cheese_listing:write")
+	 */
 	public function setTextDescription(string $description): self {
 		$this->description = nl2br($description);
 
@@ -99,6 +110,11 @@ class CheeseListing {
     return $this->createdAt;
   }
 
+	/**
+	 * How long ago in text that this cheese listing was added.
+	 *
+	 * @Groups("cheese_listing:read")
+	 */
 	public function getCreatedAtAgo(){
 		return Carbon::instance(
 			$this->getCreatedAt()
