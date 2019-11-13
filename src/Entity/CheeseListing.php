@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "put"
  *   },
  *   normalizationContext={"groups"={"cheese_listing:read"}},
+ *   denormalizationContext={"groups"={"cheese_listing:write"}},
  *   shortName="cheeses"
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
@@ -29,7 +30,7 @@ class CheeseListing {
 
   /**
    * @ORM\Column(type="string", length=255)
-	 * @Groups({"cheese_listing:read"})
+	 * @Groups({"cheese_listing:read", "cheese_listing:write"})
    */
   private $title;
 
@@ -42,7 +43,7 @@ class CheeseListing {
   /**
 	 * The price of this delicious cheese in cents.
    * @ORM\Column(type="integer")
-	 * @Groups({"cheese_listing:read"})
+	 * @Groups({"cheese_listing:read", "cheese_listing:write"})
    */
   private $price;
 
