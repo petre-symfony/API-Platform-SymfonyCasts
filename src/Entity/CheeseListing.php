@@ -59,9 +59,9 @@ class CheeseListing {
    */
   private $isPublished=false;
 
-	public function __construct(string $title){
+	public function __construct(string $name){
 		$this->createdAt = new \DateTimeImmutable();
-		$this->title = $title;
+		$this->title = $name;
 	}
 
   public function getId(): ?int {
@@ -71,7 +71,7 @@ class CheeseListing {
   public function getTitle(): ?string {
     return $this->title;
   }
-  
+
 
   public function getDescription(): ?string {
     return $this->description;
