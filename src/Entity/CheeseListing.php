@@ -6,6 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+
 
 /**
  * @ApiResource(
@@ -89,6 +91,7 @@ class CheeseListing {
 	 * The description of the cheese as raw text.
 	 *
 	 * @Groups("cheese_listing:write")
+	 * @SerializedName("description")
 	 */
 	public function setTextDescription(string $description): self {
 		$this->description = nl2br($description);
