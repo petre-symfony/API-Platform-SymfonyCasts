@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,6 +22,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *   shortName="cheeses"
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
  */
 class CheeseListing {
   /**
