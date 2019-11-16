@@ -19,7 +19,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  * @ApiResource(
  *   collectionOperations={"get", "post"},
  *   itemOperations = {
- *     "get",
+ *     "get"={
+ *        "normalization_context"={"groups"={"cheese_listing:read", "cheese_listing:item:get"}},
+ *	 		},
  *     "put"
  *   },
  *   normalizationContext={"groups"={"cheese_listing:read"}, "swagger_definition_name"="Read"},
