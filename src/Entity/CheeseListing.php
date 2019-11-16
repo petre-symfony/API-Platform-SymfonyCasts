@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 Use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,6 +29,7 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  * @ApiFilter(BooleanFilter::class, properties={"isPublished"})
  * @ApiFilter(SearchFilter::class, properties={"title": "partial", "description": "partial" })
  * @ApiFilter(RangeFilter::class, properties={"price"})
+ * @ApiFilter(PropertyFilter::class)
  */
 class CheeseListing {
   /**
@@ -93,7 +95,7 @@ class CheeseListing {
 		}
 		return substr($this->description, 0, 40).'...';
 	}
-	
+
 	public function setDescription($description):self{
 		$this->description = $description;
 		return $this;
