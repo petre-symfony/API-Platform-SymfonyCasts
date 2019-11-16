@@ -143,7 +143,7 @@ class User implements UserInterface {
 	public function getCheeseListings(): Collection {
 		return $this->cheeseListings;
 	}
-	
+
 	public function addCheeseListing(CheeseListing $cheeseListing): self {
 		if (!$this->cheeseListings->contains($cheeseListing)) {
 			$this->cheeseListings[] = $cheeseListing;
