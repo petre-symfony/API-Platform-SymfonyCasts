@@ -8,6 +8,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -52,6 +54,15 @@ class User implements UserInterface {
 	 * @Assert\NotBlank()
 	 */
 	private $username;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner")
+	 */
+	private $cheeseListings;
+
+	public function __construct() {
+		$this->cheeseListings = new ArrayCollection();
+	}
 
   public function getId(): ?int {
     return $this->id;
@@ -123,6 +134,32 @@ class User implements UserInterface {
 
 	public function setUsername(string $username): self {
 		$this->username = $username;
+		return $this;
+	}
+
+	/**
+	 * @return Collection|CheeseListing[]
+	 */
+	public function getCheeseListings(): Collection {
+		return $this->cheeseListings;
+	}
+	
+	public function addCheeseListing(CheeseListing $cheeseListing): self {
+		if (!$this->cheeseListings->contains($cheeseListing)) {
+			$this->cheeseListings[] = $cheeseListing;
+			$cheeseListing->setOwner($this);
+		}
+		return $this;
+	}
+
+	public function removeCheeseListing(CheeseListing $cheeseListing): self {
+		if ($this->cheeseListings->contains($cheeseListing)) {
+			$this->cheeseListings->removeElement($cheeseListing);
+			// set the owning side to null (unless already changed)
+			if ($cheeseListing->getOwner() === $this) {
+				$cheeseListing->setOwner(null);
+			}
+		}
 		return $this;
 	}
 }
