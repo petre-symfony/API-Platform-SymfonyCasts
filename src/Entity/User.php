@@ -58,6 +58,7 @@ class User implements UserInterface {
 	/**
 	 * @ORM\OneToMany(targetEntity="App\Entity\CheeseListing", mappedBy="owner", cascade={"persist"})
 	 * @Groups({"user:read", "user:write"})
+	 * @Assert\Valid()
 	 */
 	private $cheeseListings;
 
